@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI Chatbot Built with Next.js, Clerk, and Stripe
+
+![image](https://github.com/user-attachments/assets/a15b3686-9de7-476d-9294-51f59fd246c0)
+
+🚀 A modern AI chatbot platform built from scratch using state-of-the-art technologies! This project delivers a seamless user experience with robust features and an intuitive interface.
+
+## Features
+🛠️ Complete AI Chatbot Platform <br />
+
+🔒 User Authentication with Clerk <br />
+
+💳 Free & Pro Plans Powered by Stripe  <br />
+
+💬 Persistent Chat History Saved in MongoDB  <br />
+
+🔄 Real-Time Streaming API Responses  <br />
+
+🎨 Responsive UI Built with shadcn/ui  <br />
+
+⚡ Optimistic UI Updates for Better UX  <br />
+
+📚 Infinite Message Loading  <br />
+
+🔤 100% Written in TypeScript  <br />
 
 ## Getting Started
+Follow these steps to set up the project:
 
-First, run the development server:
+1. Clone the Repository
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+2. Install Dependencies
 ```
+cd your-repo-name
+npm install
+```
+4. Configure Environment Variables
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+   Fill out the variables in `.env`:
+```
+# OpenAI API Key
+OPENAI_API_KEY=your_openai_api_key
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# Clerk Authentication
+NEXT_PUBLIC_CLERK_FRONTEND_API=your_clerk_frontend_api
+CLERK_API_KEY=your_clerk_api_key
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Stripe Keys
+STRIPE_SECRET_KEY=your_stripe_secret_key
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key
 
-## Learn More
+# MongoDB Connection
+DATABASE_URL=mongodb+srv://your_username:your_password@your_cluster.mongodb.net/your_database?retryWrites=true&w=majority
 
-To learn more about Next.js, take a look at the following resources:
+# App URL
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+```
+4. Set Up the Database
+```
+npx prisma generate
+npx prisma db push
+```
+5. Run the Development Server
+```
+npm run dev
+```
+The app will be live at `http://localhost:3000`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Highlights
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Real-Time AI Chat:** Interactive, responsive, and optimized for user experience. <br />
 
-## Deploy on Vercel
+**Free & Pro Plans:** Flexible subscription options powered by Stripe. <br />
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Elegant and Responsive Design:** Built with shadcn/ui for a modern, clean look.
