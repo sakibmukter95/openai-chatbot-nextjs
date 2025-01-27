@@ -7,10 +7,9 @@ import Image from 'next/image'
 export default function Header() {
   return (
     <header className='py-3'>
-      <div className='container flex max-w-3xl items-center justify-between'>
+      <div className='flex items-center justify-between max-w-6xl mx-auto'>
         <Link href='/'>
         <Image src={"/logo.png"} width={150} height={80} alt=''/></Link>
-
         <SignedIn>
           <UserButton afterSignOutUrl='/' />
         </SignedIn>
