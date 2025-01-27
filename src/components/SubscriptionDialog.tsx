@@ -8,7 +8,7 @@ import {
 import { Drawer as DrawerPrimitive } from "vaul";
 import { cn } from "@/lib/utils";
 import { Check } from "lucide-react";
-import { createStripeCheckoutSession } from "@/lib/action";
+import { createStripeCheckoutSession } from "@/lib/actions";
 
 import { loadStripe } from "@stripe/stripe-js";
 import { toast } from "sonner";
@@ -35,35 +35,29 @@ export default function SubscriptionDialog(
     try {
       const lineItems = [
         {
-          price: "price_1QlVa5GM0q7iwCAxqUqQ8XjY",
+          price: "price_1QlsAjGM0q7iwCAxhis1y3pf", // Replace with your Stripe Price ID
           quantity: 1,
         },
       ];
-
-      const { sessionId, checkoutError } = await createStripeCheckoutSession(
-        lineItems
-      );
-
+  
+      const { sessionId, checkoutError } = await createStripeCheckoutSession(lineItems);
+  
       if (!sessionId || checkoutError) {
         throw new Error(checkoutError || "Failed to create checkout session!");
       }
-
+  
       const stripe = await stripePromise;
       if (!stripe) throw new Error("Failed to load Stripe!");
-
+  
       const { error } = await stripe.redirectToCheckout({ sessionId });
-
+  
       if (error) {
-        if (error instanceof Error) throw new Error(error.message);
-      } else {
-        throw error;
+        throw error instanceof Error ? new Error(error.message) : error;
       }
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        toast.error(error.message || "Failed to create checkout session!");
-      } else {
-        toast.error("An unknown error occurred!");
-      }
+    } catch (error) {
+      toast.error(
+        error instanceof Error ? error.message : "An unknown error occurred!"
+      );
     }
   }
   return (

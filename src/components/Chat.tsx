@@ -13,7 +13,7 @@ import Typewriter from 'typewriter-effect';
 import { SendHorizontalIcon, Zap } from "lucide-react";
 import { useClerk, useUser } from "@clerk/nextjs";
 import { toast } from "sonner";
-import { AddFreeCredits } from "@/lib/action";
+import { AddFreeCredits } from "@/lib/actions";
 import Image from "next/image";
 
 export default function Chat() {
@@ -119,7 +119,7 @@ export default function Chat() {
               <Button
                 size="sm"
                 onClick={() => setSubscriptionDialogOpen(true)}
-                className="bg-white text-zinc-800"
+                className="bg-white text-zinc-800 hover:bg-emerald-200"
               >
                 Get more credits
               </Button>

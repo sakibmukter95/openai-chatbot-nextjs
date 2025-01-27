@@ -5,7 +5,7 @@ import { toast } from 'sonner'
 import { useEffect } from 'react'
 import { useClerk } from '@clerk/nextjs'
 import { useSearchParams } from 'next/navigation'
-import { retrieveStripeCheckoutSession } from '@/lib/action'
+import { retrieveStripeCheckoutSession } from '@/lib/actions'
 import { MoveLeft } from 'lucide-react'
 
 export default function Checkout() {

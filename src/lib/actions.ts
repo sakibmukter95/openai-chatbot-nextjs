@@ -8,19 +8,20 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
 })
 
 export async function AddFreeCredits() {
-  const user = await currentUser()
+  const user = await currentUser();
 
   if (!user) {
-    return { success: false, error: 'You need to sign in first.' }
+    return { success: false, error: "You need to sign in first." };
   }
 
+  const currentCredits = typeof user.publicMetadata?.credits === 'number' ? user.publicMetadata.credits : 0;
   await clerkClient.users.updateUserMetadata(user.id, {
     publicMetadata: {
-      credits: 10
-    }
-  })
+      credits: currentCredits + 10,
+    },
+  });
 
-  return { success: true, error: null }
+  return { success: true, error: null };
 }
 
 type LineItem = Stripe.Checkout.SessionCreateParams.LineItem
@@ -28,8 +29,8 @@ type LineItem = Stripe.Checkout.SessionCreateParams.LineItem
 export async function createStripeCheckoutSession(lineItems: LineItem[]) {
   try {
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card'], // Specify payment method types
-      mode: 'subscription', // Or 'payment' for one-time payments
+      payment_method_types: ["card"],
+      mode: "subscription", // Or 'payment' for one-time payments
       line_items: lineItems,
       success_url: `${process.env.NEXT_PUBLIC_APP_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/cancel`,
@@ -37,7 +38,8 @@ export async function createStripeCheckoutSession(lineItems: LineItem[]) {
 
     return { sessionId: session.id, checkoutError: null };
   } catch (error) {
-    return { sessionId: null, checkoutError: (error as Error).message };
+    console.error("Error creating Stripe session:", error); // Log the actual error for debugging
+    return { sessionId: null, checkoutError: (error as Error).message || "Unknown error occurred" };
   }
 }
 
